@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: SD
+  annotations:
+    github.com/project-slug: Necas8/SD
+spec:
+  type: library
+  lifecycle: production
