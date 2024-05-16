@@ -1,10 +1,103 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: SD
-  annotations:
-    github.com/project-slug: Necas8/SD
+  name: my-project
+  description: This is a project consisting of frontend, backend, and infrastructure components.
+  tags:
+    - frontend
+    - backend
+    - infrastructure
+    - angular
+    - nodejs
+    - aws
+    - terraform
 spec:
-  type: library
+  type: system
+  owner: team-xyz
   lifecycle: production
-  owner: default
+  providesApis:
+    - my-project-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: frontend
+  description: The frontend component of the project, built with Angular.
+  tags:
+    - frontend
+    - angular
+spec:
+  type: service
+  owner: team-xyz
+  lifecycle: production
+  system: my-project
+  links:
+    - url: https://github.com/my-org/my-project-frontend
+      title: GitHub Repository
+  implementsApis:
+    - my-project-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: backend
+  description: The backend component of the project, built with Node.js and deployed on AWS Lambda.
+  tags:
+    - backend
+    - nodejs
+    - aws
+spec:
+  type: service
+  owner: team-xyz
+  lifecycle: production
+  system: my-project
+  links:
+    - url: https://github.com/my-org/my-project-backend
+      title: GitHub Repository
+  implementsApis:
+    - my-project-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: infrastructure
+  description: The infrastructure component of the project, defined using Terraform modules.
+  tags:
+    - infrastructure
+    - terraform
+spec:
+  type: service
+  owner: team-xyz
+  lifecycle: production
+  system: my-project
+  links:
+    - url: https://github.com/my-org/my-project-infrastructure
+      title: GitHub Repository
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: my-project-api
+  description: API provided by the backend component and consumed by the frontend component.
+  tags:
+    - api
+spec:
+  type: openapi
+  lifecycle: production
+  owner: team-xyz
+  definition: >
+    openapi: 3.0.0
+    info:
+      title: My Project API
+      version: 1.0.0
+    paths:
+      /example:
+        get:
+          summary: Example endpoint
+          responses:
+            '200':
+              description: Successful response
