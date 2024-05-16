@@ -1,25 +1,4 @@
 apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: my-project
-  description: This is a project consisting of frontend, backend, and infrastructure components.
-  tags:
-    - frontend
-    - backend
-    - infrastructure
-    - angular
-    - nodejs
-    - aws
-    - terraform
-spec:
-  type: system
-  owner: team-xyz
-  lifecycle: production
-  providesApis:
-    - my-project-api
-
----
-apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: my-project
@@ -31,15 +10,16 @@ spec:
   domain: my-domain
   lifecycle: production
   components:
-    - frontend
-    - backend
-    - infrastructure
+    - my-project/frontend
+    - my-project/backend
+    - my-project/infrastructure
 
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: frontend
+  namespace: my-project
   description: The frontend component of the project, built with Angular.
   tags:
     - frontend
@@ -60,6 +40,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: backend
+  namespace: my-project
   description: The backend component of the project, built with Node.js and deployed on AWS Lambda.
   tags:
     - backend
@@ -81,6 +62,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: infrastructure
+  namespace: my-project
   description: The infrastructure component of the project, defined using Terraform modules.
   tags:
     - infrastructure
