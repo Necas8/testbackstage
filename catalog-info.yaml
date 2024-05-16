@@ -20,6 +20,23 @@ spec:
 
 ---
 apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: my-project
+  description: The system encompassing all components of the My Project application.
+  tags:
+    - system
+spec:
+  owner: team-xyz
+  domain: my-domain
+  lifecycle: production
+  components:
+    - frontend
+    - backend
+    - infrastructure
+
+---
+apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: frontend
